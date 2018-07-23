@@ -58,11 +58,12 @@ object LocLog {
     private fun clearOverFlowFiles(dir: File?) {
         val lst = dir?.run {
             listFiles(object : FileFilter {
-                override fun accept(p0: File?): Boolean {
-                    if (name.startsWith("MC.") && name.endsWith(".txt")) {
-                        return true
-                    }
-                    return false
+                override fun accept(file: File?): Boolean {
+                    return file?.run {
+                        if (name.startsWith("MC.") && name.endsWith("txt"))
+                            return true
+                        false
+                    } ?: false
                 }
             })
         }
